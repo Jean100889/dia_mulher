@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem Especial - Dia das Mulheres</title>
+    <style>
+        body {
+            background-color: #ffe6f2;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            background-image: url('https://aeapr.com.br/wp-content/uploads/2017/03/Fundo_DiaMulher.17.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        h1 {
+            color: #d63384;
+            font-size: 2.5em;
+            animation: fadeIn 2s ease-in-out;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .mensagem {
+            font-size: 1.5em;
+            color: #a0006b;
+            max-width: 600px;
+            animation: fadeIn 3s ease-in-out;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+            display: none;
+        }
+        .flor {
+            position: absolute;
+            font-size: 24px;
+            animation: cair 5s linear infinite;
+        }
+        .botoes {
+            margin-top: 20px;
+        }
+        .btn {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .btn-sim {
+            background-color: green;
+            color: white;
+        }
+        .btn-nao {
+            background-color: red;
+            color: white;
+            position: absolute;
+        }
+        #youtube-player {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes cair {
+            from { transform: translateY(-100px); opacity: 1; }
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="pergunta">Você gosta de mim? 💖</h1>
+    <div class="botoes" id="botoes">
+        <button class="btn btn-sim" onclick="mostrarMensagem()">Sim</button>
+        <button class="btn btn-nao" onmouseover="moverBotao()">Não</button>
+    </div>
+    <p class="mensagem" id="mensagem">Hoje celebramos a força, a coragem e a beleza de todas as mulheres. Que seu dia seja repleto de amor e alegria! 💖</p>
+    
+    <!-- Vídeo do YouTube oculto -->
+    <iframe id="youtube-player" width="1" height="1" 
+        src="https://www.youtube.com/embed/U5aFfW_U7vY?autoplay=1&loop=1&playlist=U5aFfW_U7vY" 
+        frameborder="0" allow="autoplay">
+    </iframe>
+
+    <script>
+        function criarFlor() {
+            let flor = document.createElement("div");
+            flor.classList.add("flor");
+            flor.innerHTML = "🌷";
+            document.body.appendChild(flor);
+            
+            let x = Math.random() * window.innerWidth;
+            flor.style.left = x + "px";
+            flor.style.top = "-50px";
+            flor.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            
+            setTimeout(() => {
+                flor.remove();
+            }, 5000);
+        }
+        setInterval(criarFlor, 500);
+        
+        function moverBotao() {
+            let botao = document.querySelector('.btn-nao');
+            let larguraJanela = window.innerWidth - botao.offsetWidth;
+            let alturaJanela = window.innerHeight - botao.offsetHeight;
+            let novaPosicaoX = Math.random() * larguraJanela;
+            let novaPosicaoY = Math.random() * alturaJanela;
+            botao.style.left = novaPosicaoX + 'px';
+            botao.style.top = novaPosicaoY + 'px';
+        }
+
+        function mostrarMensagem() {
+            document.getElementById('mensagem').style.display = 'block';
+            document.getElementById('pergunta').style.display = 'none';
+            document.getElementById('botoes').style.display = 'none';
+            
+            // Iniciar o vídeo do YouTube
+            document.getElementById('youtube-player').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
